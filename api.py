@@ -23,9 +23,7 @@ class Invoice(Resource):
         for invoice in invoices:
             if (invoiceId == invoice["invoiceId"]):
                 return invoice, 200
-            else:
-                return "Invoice not found" , 404
-
+        return "Invoice not found" , 404
 
     def post(self, invoiceId):
         parser = reqparse.RequestParser()
@@ -48,7 +46,6 @@ class Invoice(Resource):
         return invoice, 201
 
 
-api.add_resource(Invoice, "/invoice/<string:invoiceId>")
-
+api.add_resource(Invoice, "/invoices/<string:invoiceId>")
 
 app.run(debug=True)
