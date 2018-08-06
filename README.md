@@ -7,8 +7,8 @@ We will be creating a RESTful API that is used to store users details, which wil
 
 ```./up.sh```
 
-## 2. Install API testing tool:
+## Testing tool:
 
-[Postman](https://www.getpostman.com/apps)
+For testing a good way is to install [Postman](https://www.getpostman.com/apps) tool.
 
 
