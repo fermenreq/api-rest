@@ -5,7 +5,7 @@ We will be creating a RESTful API using **Flask** that is used to store users de
 
 ## 1. Installation & Deployment
 
-```./up.sh```
+``` ./up.sh ``` && ```python apy.py```
 
 ## Testing tool:
 
