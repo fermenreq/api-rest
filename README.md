@@ -14,9 +14,13 @@ For testing a good way is to install [Postman](https://www.getpostman.com/apps) 
 
 ## Example GET:
 
-Request: ```127.0.0.1:5000/invoices/invoice_00```
+Request: ``` 0.0.0.0:8081/invoices/invoice_00```
 
-Response: ```{
+Response: ```content-type:application/json
+content-length:99
+server: Werkzeug/0.14.1 Python/2.7.12
+date:Thu, 09 Aug 2018 11:33:53 GMT
+{
     "debtor": "Paul Smith", 
     "invoiceId": "invoice_00", 
     "path_invoice": "/seres/path"
