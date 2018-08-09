@@ -12,12 +12,12 @@ We will be creating a RESTful API using **Flask** that is used to store users de
 For testing a good way is to install [Postman](https://www.getpostman.com/apps) tool.
 
 
-## Example GET:
+## Example using method **GET**:
 
-Request: 
-``` 0.0.0.0:8081/invoices/invoice_00```
+Request:
+``` http://**IP**:8081/invoices/invoice_00```
 
-Response: 
+Response:
 ```content-type:application/json
 content-length:99
 server: Werkzeug/0.14.1 Python/2.7.12
