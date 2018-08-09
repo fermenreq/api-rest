@@ -48,4 +48,4 @@ class Invoice(Resource):
 
 api.add_resource(Invoice, "/invoices/<string:invoiceId>")
 
-app.run(debug=True)
+app.run(host='0.0.0.0', port=8081, debug=True)
