@@ -1,53 +1,66 @@
-from flask import Flask
+## This file is part of OFION process BPM.
+## 
+# Fernando Mendez - fernando.mendez@atos.net
+#
+############################################
+#-*- coding: UTF-8 -*-
+
+from flask import Flask,jsonify
 from flask_restful import Api, Resource, reqparse
+from flask import abort
+import readPDF
+import json
+
 
 app = Flask(__name__)
-api = Api(app)
 
-invoices = [
-    {
-        "invoiceId":"invoice_00",
-        "debtor":"Paul Smith",
-        "path_invoice":"/seres/path",
-    },
-    {
-        "invoiceId":"invoice_01",
-        "debtor":"Rebeca Singson",
-        "path_invoice":"/seres/path",
-    }
-]
+# invoices = [
+#     {
+#         "Name": "Mr. Christopher Jones", 
+#         "Zone": "Globecity East", 
+#         "Url_invoice": "http://visibillity.com/collateral/electronic_documents/invoice.pdf", 
+#         "InvoiceID": 22, 
+#         "State": "Globeland             1001", 
+#         "Address": "254 East Road", 
+#         "Date": "26/02/2001"
+#     }
 
-class Invoice(Resource):
+# ]
 
-    def get(self, invoiceId):
-        for invoice in invoices:
-            if (invoiceId == invoice["invoiceId"]):
-                return invoice, 200
-        return "Invoice not found" , 404
+data = readPDF.processData()
 
-    def post(self, invoiceId):
-        parser = reqparse.RequestParser()
+@app.route('/user/<int:id_user>', methods=['GET'])
 
-        parser.add_argument("debtor")
-        args = parser.parse_args()
-
-        for invoice in invoices:
-            if (invoiceId == invoice["invoiceId"]):
-                return "The id {} already exists".format(invoiceId), 400
-
-        invoice = [
-            {
-                "invoiceId":invoiceId,
-                "debtor":args["debtor"],
-                "path_invoice":"/seres/path",
-            }
-        ]
-        invoices.append(invoice)
-        return invoice, 201
+def get_invoice(id_user):
+    return json.dump(data)
 
 
-api.add_resource(Invoice, "/invoices/<string:invoiceId>")
+def post(invoiceId):
+    parser = reqparse.RequestParser()
 
-app.run(host='0.0.0.0', port=8081, debug=True)
+    parser.add_argument("Name")
+    args = parser.parse_args()
+
+    for invoice in invoices:
+        if (invoiceId == invoice["InvoiceID"]):
+            return "The id {} already exists".format(invoiceId), 400
+
+    invoice = [
+        {
+            "InvoiceID": invoiceId, 
+            "Name": args["Name"], 
+            "Zone": "Globecity East", 
+            "Url_invoice": "http://visibillity.com/collateral/electronic_documents/invoice.pdf", 
+            "State": "Globeland             1001", 
+            "Address": "254 East Road", 
+            "Date": "26/02/2001"
+        }
+    ]
+    invoices.append(invoice)
+    return invoice, 201
 
 
+
+if __name__ == '__main__':
+
+    app.run(host='127.0.0.1', port="8081",debug=True)
