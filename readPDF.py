@@ -89,11 +89,20 @@ def processData():
 
 	id_user = 0
 
-	invoices = {'Name':data[0],'Address':data[1],'Zone':data[2],'State':data[3],'Date':data[4],'Url_invoice':data[5],'InvoiceID':long(data[6]),'id_user':id_user}
+	data = {"Invoice":{
+						'Name':data[0],
+						'Address':data[1],
+						'Zone':data[2],
+						'State':data[3],
+						'Date':data[4],
+						'Url_invoice':data[5],
+						'InvoiceID':long(data[6]),
+						'id_user':id_user
+					}
+			} 
 
 
-	print invoices['id_user']
-	return json.dumps(invoices,ensure_ascii=False,sort_keys=True, indent=4)	
+	return json.dumps(data, encoding='ascii',ensure_ascii=True,indent=4)	
 
 if __name__ == "__main__":
 	print processData()
