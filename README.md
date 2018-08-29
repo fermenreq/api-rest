@@ -21,7 +21,7 @@ For testing a good way is to install [Postman](https://www.getpostman.com/apps) 
 From step 2: Get an invoice for default user: ID is zero
 
 Request:
-``` http://localhost:8081/invoice/user/0/```
+``` http://localhost:8081/invoice/user/0```
 
 Response:
 
