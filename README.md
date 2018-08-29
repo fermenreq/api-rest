@@ -53,67 +53,28 @@ Response:
 {
   "invoice": [
     {
-      "invoice": {
-        "Address": "23 East Road France", 
-        "Date": "Wed, 29 Aug 2018 07:40:05 GMT", 
-        "InvoiceID": "123456789", 
-        "Name": "Mr.Romeo Trump", 
-        "State": "EEUU", 
-        "Url_invoice": "http://external_services_ofion_invoice.pdf", 
-        "Zone": "New York", 
-        "id_user": 93
-      }
+      "Address": "23 East Road France", 
+      "Date": "Wed, 29 Aug 2018 07:52:42 GMT", 
+      "InvoiceID": "123456789", 
+      "Name": "Mr.Romeo Trump", 
+      "State": "EEUU", 
+      "Url_invoice": "http://external_services_ofion_invoice.pdf", 
+      "Zone": "New York", 
+      "id_user": 3
     }, 
     {
-      "invoice": {
-        "Address": "23 East Road France", 
-        "Date": "Wed, 29 Aug 2018 07:40:08 GMT", 
-        "InvoiceID": "123456789", 
-        "Name": "Mr.Romeo Trump", 
-        "State": "EEUU", 
-        "Url_invoice": "http://external_services_ofion_invoice.pdf", 
-        "Zone": "New York", 
-        "id_user": 1
-      }
-    }, 
-    {
-      "invoice": {
-        "Address": "23 East Road France", 
-        "Date": "Wed, 29 Aug 2018 07:40:08 GMT", 
-        "InvoiceID": "123456789", 
-        "Name": "Mr.Romeo Trump", 
-        "State": "EEUU", 
-        "Url_invoice": "http://external_services_ofion_invoice.pdf", 
-        "Zone": "New York", 
-        "id_user": 29
-      }
-    }, 
-    {
-      "invoice": {
-        "Address": "23 East Road France", 
-        "Date": "Wed, 29 Aug 2018 07:40:09 GMT", 
-        "InvoiceID": "123456789", 
-        "Name": "Mr.Romeo Trump", 
-        "State": "EEUU", 
-        "Url_invoice": "http://external_services_ofion_invoice.pdf", 
-        "Zone": "New York", 
-        "id_user": 48
-      }
-    }, 
-    {
-      "invoice": {
-        "Address": "23 East Road France", 
-        "Date": "Wed, 29 Aug 2018 07:40:10 GMT", 
-        "InvoiceID": "123456789", 
-        "Name": "Mr.Romeo Trump", 
-        "State": "EEUU", 
-        "Url_invoice": "http://external_services_ofion_invoice.pdf", 
-        "Zone": "New York", 
-        "id_user": 1
-      }
+      "Address": "23 East Road France", 
+      "Date": "Wed, 29 Aug 2018 07:52:43 GMT", 
+      "InvoiceID": "123456789", 
+      "Name": "Mr.Romeo Trump", 
+      "State": "EEUU", 
+      "Url_invoice": "http://external_services_ofion_invoice.pdf", 
+      "Zone": "New York", 
+      "id_user": 28
     }
   ]
 }
+
 ```
 
 
