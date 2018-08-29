@@ -81,12 +81,16 @@ def create_invoice():
             "Zone": request.json['Zone'], 
             "Address": request.json['Address'], 
             "Date": date
-        
     }
 
     invoices.append(invoice)
     print "Tam", len(invoices)
     return jsonify({"invoice": invoice}),201
+
+#Fake function to send data to another service
+@app.route('/invoice/send', methods=['POST'])
+def send_invoice():
+    
 
 
 # This function generates a "public" version o an invoice to send to the client/services in order 
