@@ -90,15 +90,13 @@ def create_invoice():
 #Fake function to send data to another service
 @app.route('/invoice/send', methods=['POST'])
 def send_invoice():
+    create_invoice()
     
-
-
 # This function generates a "public" version o an invoice to send to the client/services in order 
 # to avoid clients to be forced to construct URLs from the invoice id
 
 def make_public_invoice(invoice):
     new_invoice= {}
-
     for i in invoice:
         if i == 'id_user':
             new_invoice['uri'] = url_for('get_invoice_version2',invoice_id=invoice['id_user'],_external=True)
