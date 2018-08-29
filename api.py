@@ -5,7 +5,6 @@
 #
 # Fernando Mendez - fernando.mendez@atos.net
 
-
 from flask import Flask,jsonify
 from flask_restful import Api, Resource, reqparse
 from flask import abort
@@ -16,6 +15,8 @@ from flask import request
 from flask import url_for
 import time
 import datetime
+from urllib2 import Request
+import requests
 
 
 app = Flask(__name__)
@@ -88,9 +89,27 @@ def create_invoice():
     return jsonify({"invoice": invoice}),201
 
 #Fake function to send data to another service
-@app.route('/invoice/send', methods=['POST'])
+@app.route('/invoice/send', methods=['POST','GET'])
 def send_invoice():
-    create_invoice()
+
+    URL = 'http://0.0.0.0:8081/invoice/send'
+
+    headers = {
+        'Content-Type': 'application/json',
+    }
+
+    data = {
+        "Address": "23 East Road France",  
+        "InvoiceID": "123456789", 
+        "Name": "Mr.Romeo Trump", 
+        "State": "EEUU", 
+        "Url_invoice": "http://external_services_ofion_invoice.pdf", 
+        "Zone": "New York"
+    }
+
+    content = json.dumps(data)
+
+    r = requests.post(URL, data=content, headers=headers)
     
 # This function generates a "public" version o an invoice to send to the client/services in order 
 # to avoid clients to be forced to construct URLs from the invoice id
