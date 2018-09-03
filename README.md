@@ -77,6 +77,46 @@ Response:
 
 ```
 
+##5. Install and enable mod_wsgi
+
+Install: ```sh /install/basic.sh```
+
+##5.1 Apache setup - WSGI
+In this chapter we want to serve the page using Apache via WSGI which helps to get our code deployed on Apache.
+Here is the Apache config file (**/etc/apache2/sites-available/ofion.conf**):
+
+```
+<VirtualHost *:80>
+
+	ServerAdmin webmaster@localhost
+	ServerName localhost
+
+	ErrorLog ${APACHE_LOG_DIR}/error.log
+	CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+	WSGIDaemonProcess services user=www-data group=www-data threads=5
+	WSGIProcessGroup services
+	
+	WSGIScriptAlias / /var/www/FLASKAPPS/services/ofion.wsgi
+	#Alias /static/ /var/www/FLASKAPPS/services/static
+
+	<Directory /var/www/FLASKAPPS/services/static>
+            Order allow,deny
+            Allow from all
+    </Directory>
+</VirtualHost>
+
+```
+
+```$ sudo a2ensite ofion.conf```
+
+The WSGI file (**/var/www/FlASKAPPS/ofion.wsgi**)
+```
+#!/usr/bin/python
+import sys
+sys.path.insert(0,"/var/www/FLASKAPPS/")
+from services import app as application
+```
 
 
 
