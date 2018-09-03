@@ -102,8 +102,9 @@ def processData():
 					'InvoiceID':long(data[6]),
 					'id_user':id_user
 				}
-			} 
-
+	}
+    saved_file_name=data[5].join('_invoice.pdf')
+    saveData(saved_file_name)
 
 	return json.dumps(data, encoding='ascii',ensure_ascii=True,indent=4)	
 
@@ -112,5 +113,12 @@ def generateRandomId():
     for x in range(100):
         return random.randint(1,100)
 
-    
+
+def saveData(name_file):
+    response = urllib2.urlopen(URL_INVOICE)
+    file = open(name_file,'w')
+    file.write(response.read())
+    file.close()
+    print("Completed !")
+
     
