@@ -77,11 +77,11 @@ Response:
 
 ```
 
-##5. Install and enable mod_wsgi
+## 5. Install and enable mod_wsgi
 
 Install: ```sh /install/basic.sh```
 
-##5.1 Apache setup - WSGI
+## 5.1 Apache setup - WSGI
 In this chapter we want to serve the page using Apache via WSGI which helps to get our code deployed on Apache.
 Here is the Apache config file (**/etc/apache2/sites-available/ofion.conf**):
 
@@ -117,6 +117,4 @@ import sys
 sys.path.insert(0,"/var/www/FLASKAPPS/")
 from services import app as application
 ```
-
-
 
