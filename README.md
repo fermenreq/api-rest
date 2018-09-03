@@ -4,19 +4,19 @@ We will be creating a RESTful API using **Flask** that is used to store users de
 
 The function readPDF.py process an external PDF file from a URL path
 
-## 1. Installation & Deployment
+## 1.Installation & Deployment
 
 ``` ./up.sh ``` && ```python apy.py```
 
-## Testing tool
+## 2.Testing tool
 For testing a good way is to install [Postman](https://www.getpostman.com/apps) tool.
 
-## Options to create an user invoice:
-1. Create an invoice user executing ```sh post.sh``` located in test folder
-2. Create a defualt user by a PDF http requested. The defualt user_id value is zero. For that, execute the following request:
+## 3.Options to create an invoice:
+3.1. Create an invoice  executing ```sh post.sh``` located in test folder
+3.2. Create a defualt user by a PDF http requested. The defualt user_id value is zero. For that, execute the following request:
 ```http://localhost:8081/invoice/user/0```
 
-## **GET** methods:
+## 4.GET methods:
 
 From step 2: Get an invoice for default user: ID is zero
 
