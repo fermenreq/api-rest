@@ -37,7 +37,7 @@ app = Flask(__name__)
 # External functions from utils.py
 
 data_invoice = utils.processData()
-
+print data_invoice 
 invoices = []
 decoded_data_invoice = json.loads(data_invoice)
 
@@ -47,9 +47,11 @@ def get_user_invoice(id_user):
     invoices.append(decoded_data_invoice)
     for i in invoices:
         if str(i['invoice']['id_user']) == str(id_user):
+        	#i['invoice']['id_user'] = utils.generateRandomId()
             return jsonify({"invoice": i['invoice']})
         else:
             abort(404)
+
 
 # This funcition get all invoices from invoices list
 @app.route('/invoices', methods=['GET'])
@@ -108,7 +110,6 @@ def send_invoice():
 
 
 
-    
 # This function generates a "public" version o an invoice to send to the client/services in order 
 # to avoid clients to be forced to construct URLs from the invoice id
 
@@ -131,4 +132,4 @@ def get_invoice_version2():
 
 if __name__ == '__main__':
     #app.run(host='0.0.0.0', port="8081",debug=True)
-    app.run(port="80",debug=True)
+    app.run(port=80)
