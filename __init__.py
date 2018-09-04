@@ -108,7 +108,6 @@ def send_invoice():
 
 
 
-
     
 # This function generates a "public" version o an invoice to send to the client/services in order 
 # to avoid clients to be forced to construct URLs from the invoice id

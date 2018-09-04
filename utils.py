@@ -76,6 +76,16 @@ def downloadFile():
 
     return data 
 
+
+def saveData(name_file):
+    response = urllib2.urlopen(URL_INVOICE)
+    file = open(name_file,'w')
+    file.write(response.read())
+    file.close()
+    print("Completed !")
+
+
+
 def processData():
 	data = downloadFile()
 	invoice = data[9]
@@ -114,11 +124,5 @@ def generateRandomId():
         return random.randint(1,100)
 
 
-def saveData(name_file):
-    response = urllib2.urlopen(URL_INVOICE)
-    file = open(name_file,'w')
-    file.write(response.read())
-    file.close()
-    print("Completed !")
 
     
