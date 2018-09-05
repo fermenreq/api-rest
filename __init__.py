@@ -1,8 +1,7 @@
 #-*- coding: UTF-8 -*-
-# OFION demo process BPM services.
 #
+# Fake services for OFION process invoice factoring
 # 
-#
 # Fernando Mendez - fernando.mendez@atos.net
 
 from flask import Flask,jsonify
@@ -18,24 +17,23 @@ import datetime
 from urllib2 import Request
 import requests
 from flask import send_file
+import io
+import ConfigParser
 
 app = Flask(__name__)
 
-# {
-#     "Invoice": {
-#         "Url_invoice": "http://visibillity.com/collateral/electronic_documents/invoice.pdf", 
-#         "State": "Globeland             1001", 
-#         "InvoiceID": 859652, 
-#         "id_user": 0, 
-#         "Name": "Mr. Christopher Jones", 
-#         "Zone": "Globecity East", 
-#         "Address": "254 East Road", 
-#         "Date": "26/02/2001"
-#     }
-# }
+
+CONFIG_FILE="/var/www/FLASKAPPS/services/config.ini"
+
+# Load the configuration file
+with open(CONFIG_FILE,'r+') as f:
+	sample_config=f.read()
+config = ConfigParser.RawConfigParser(allow_no_value=True)
+config.readfp(io.BytesIO(sample_config))
+
+
 
 # External functions from utils.py
-
 data_invoice = utils.processData()
 print data_invoice 
 invoices = []
@@ -50,9 +48,6 @@ def get_user_invoice(id_user):
         	return jsonify({"invoice": i['invoice']})
         else:
             abort(404)
-
-   
-
 
 # This funcition get all invoices from invoices list
 @app.route('/invoices', methods=['GET'])
@@ -92,14 +87,14 @@ def create_invoice():
     return jsonify({"invoice": invoice}),201
 
 # Fake function to invoke another service
-
 @app.route('/post', methods=['GET'])
 def send_invoice():
 
-    URL_EXTERNAL_SERVICE = 'http://0.0.0.0:8081/invoice/user'
+    URL_EXTERNAL_SERVICE=config.get('API','url_external')
+    content_type=config.get('API','content_type')
 
     headers = {
-        'Content-Type': 'application/json',
+        'Content-Type': content_type,
     }
 
     for i in invoices:
@@ -110,26 +105,18 @@ def send_invoice():
     return jsonify({"invoice": invoices}),201
 
 
-# This function generates a "public" version o an invoice to send to the client/services in order 
-# to avoid clients to be forced to construct URLs from the invoice id
-
-from flask import render_template
-
-
 @app.route('/show_invoice/<int:id_invoice>',methods=['GET'])
 def show_static_invoice(id_invoice):
-
+	path=config.get('APACHE','STATIC_PATH')
 	file = str(id_invoice)+'.pdf'
-	completed_path_with_file = '/var/www/FLASKAPPS/static/invoices/'+file
+	completed_path_with_file = str(path)+file
 
 	static_file = open(completed_path_with_file,'rb')
 	return send_file(static_file, attachment_filename=file, as_attachment=False)
 	
 
-	
-	
-
-
+# This function generates a "public" version o an invoice to send to the client/services in order 
+# to avoid clients to be forced to construct URLs from the invoice id
 
 def make_public_invoice(invoice):
     new_invoice= {}
@@ -138,7 +125,6 @@ def make_public_invoice(invoice):
             new_invoice['uri'] = url_for('get_invoice_version2',invoice_id=invoice['id_user'],_external=True)
         else:
             new_invoice[i] = invoice[i]
-
     return new_invoice
 
 def get_invoice_version2():
