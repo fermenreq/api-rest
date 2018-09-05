@@ -14,6 +14,7 @@ import itertools
 import json
 from flask import jsonify
 import random
+import os
 
 
 URL_INVOICE = "http://visibillity.com/collateral/electronic_documents/invoice.pdf"
@@ -57,7 +58,6 @@ PageObject.extractTextList = extractTextList
 def between(text_elements, drop_while, take_while):   
     return list(itertools.takewhile(take_while, itertools.dropwhile(drop_while, text_elements)))[1:]
     
-
 def downloadFile(): 
     content = ""
     req = urllib2.Request(URL_INVOICE)
@@ -74,38 +74,47 @@ def downloadFile():
     # [u'Mr. Christopher Jones', u'254 East Road', u'Globecity East', u'Globeland 1001', u'127-96', u'98750-96', 
     # u'Speed Transport', u'Road', u'95643', u'26/02/2001', u'859652']
 
-    return data 
+    return data
+
+def saveData(name_file):
+    req = urllib2.Request(URL_INVOICE)
+    remote_file = urllib2.urlopen(req)
+
+    file_local = open('/var/www/FLASKAPPS/static/invoices/' + name_file + '.pdf','wb')
+    file_local.write(remote_file.read())
+    file_local.close()
+
+
 
 def processData():
-	data = downloadFile()
-	invoice = data[9]
-	date = data[10]
+    data = downloadFile()
+    invoice = data[9]
+    date = data[10]
+    id_user = 0
 
-	for i in data:
-		del data[4:8]
-	
-	data.append(invoice)
-	data.append(date)
-	data.insert(len(data)-1,URL_INVOICE)
+    for i in data:
+        del data[4:8]
+    data.append(invoice)
+    data.append(date)
+    data.insert(len(data)-1, URL_INVOICE)
 
-	id_user = 0
+    name_file_saved=str(data[6])
+    saveData(name_file_saved)
 
-	data = {
-			"invoice":
-				{
-					'Name':data[0],
-					'Address':data[1],
-					'Zone':data[2],
-					'State':data[3],
-					'Date':data[4],
-					'Url_invoice':data[5],
-					'InvoiceID':long(data[6]),
-					'id_user':id_user
-				}
-			} 
-
-
-	return json.dumps(data, encoding='ascii',ensure_ascii=True,indent=4)	
+   
+    data = {
+        "invoice":{
+            "Name": data[0],
+            "Address":data[1],
+            "Zone":data[2],
+            "State":data[3],
+            "Date":data[4],
+            "Url_invoice": data[5],
+            "InvoiceID":long(data[6]),
+            "id_user":id_user
+        }
+    }
+    return json.dumps(data,encoding="ascii",ensure_ascii=True,indent=4)
 
 
 def generateRandomId():
