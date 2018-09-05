@@ -80,16 +80,17 @@ def saveData(name_file):
     req = urllib2.Request(URL_INVOICE)
     remote_file = urllib2.urlopen(req)
 
-    with open(os.path.join('/var/www/FLASKAPPS/static/invoices/', name_file), 'w') as file:
-        file.write(remote_file.read())
-        file.close()
+    file_local = open('/var/www/FLASKAPPS/static/invoices/' + name_file + '.pdf','wb')
+    file_local.write(remote_file.read())
+    file_local.close()
+
 
 
 def processData():
     data = downloadFile()
     invoice = data[9]
-
     date = data[10]
+    id_user = 0
 
     for i in data:
         del data[4:8]
@@ -99,10 +100,8 @@ def processData():
 
     name_file_saved=str(data[6])
     saveData(name_file_saved)
-    
 
-    id_user = 0
-
+   
     data = {
         "invoice":{
             "Name": data[0],

@@ -11,13 +11,13 @@ from flask import abort
 import utils
 import json
 from flask import make_response
-from flask import request
+from flask import request,redirect
 from flask import url_for
 import time
 import datetime
 from urllib2 import Request
 import requests
-
+from flask import send_file
 
 app = Flask(__name__)
 
@@ -47,10 +47,11 @@ def get_user_invoice(id_user):
     invoices.append(decoded_data_invoice)
     for i in invoices:
         if str(i['invoice']['id_user']) == str(id_user):
-        	#i['invoice']['id_user'] = utils.generateRandomId()
-            return jsonify({"invoice": i['invoice']})
+        	return jsonify({"invoice": i['invoice']})
         else:
             abort(404)
+
+   
 
 
 # This funcition get all invoices from invoices list
@@ -109,9 +110,26 @@ def send_invoice():
     return jsonify({"invoice": invoices}),201
 
 
-
 # This function generates a "public" version o an invoice to send to the client/services in order 
 # to avoid clients to be forced to construct URLs from the invoice id
+
+from flask import render_template
+
+
+@app.route('/show_invoice/<int:id_invoice>',methods=['GET'])
+def show_static_invoice(id_invoice):
+
+	file = str(id_invoice)+'.pdf'
+	completed_path_with_file = '/var/www/FLASKAPPS/static/invoices/'+file
+
+	static_file = open(completed_path_with_file,'rb')
+	return send_file(static_file, attachment_filename=file, as_attachment=False)
+	
+
+	
+	
+
+
 
 def make_public_invoice(invoice):
     new_invoice= {}
