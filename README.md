@@ -1,8 +1,8 @@
-# Simple Python API Rest
+# Fake OFION rest services
 
 We will be creating a RESTful API using **Flask** that is used to store users details, which will have CRUD (Create, Read, Update, Delete) functions, allowing us to create new items, get details of existing items, update details of existing items and delete it.
 
-The function readPDF.py process an external PDF file from a URL path
+Also it process an invoice file from an example URL.
 
 ## 1.Installation & Deployment
 
