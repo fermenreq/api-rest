@@ -125,7 +125,7 @@ Tommcat can be configured to read files from anywhere on disk and serve them on 
 The configuration is in Tomcat's **server.xml** config file.
 
 
-"<Context docBase="/var/www/FLASKAPPS/static/invoices" path="/static"/>"
+**Context docBase="/var/www/FLASKAPPS/static/invoices" path="/static"/**
 
 
 
