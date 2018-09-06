@@ -104,6 +104,7 @@ def send_invoice():
 
     return jsonify({"invoice": invoices}),201
 
+# Testing fake function to show a saved invoice
 
 @app.route('/show_invoice/<int:id_invoice>',methods=['GET'])
 def show_static_invoice(id_invoice):
