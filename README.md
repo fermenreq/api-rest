@@ -118,3 +118,21 @@ sys.path.insert(0,"/var/www/FLASKAPPS/")
 from services import app as application
 ```
 
+## 6.Serving static content from outside of the WAR (Apache Tomcat)
+
+This method can be used to serve images, JS, CSS, JSON, PDFs and even static HTML web pages. Tomcat will serve any static content from a WAR file using the DefaultServlet.
+Tommcat can be configured to read files from anywhere on disk and serve them on an specific URL. This configuration is completly separete from you app config. 
+The configuration is in Tomcat's **server.xml** config file.
+
+
+**<Context docBase="/var/www/FLASKAPPS/static/invoices" path="/static"/>**
+
+A **Context** element is added inside **Host** element. It has got two attributes: **docBase** is the directory on disk that contains your static files and path is the URL that you watn to serve the files on. 
+
+
+
+
+
+
+
+**Author - fernando.mendez@atos.net**
